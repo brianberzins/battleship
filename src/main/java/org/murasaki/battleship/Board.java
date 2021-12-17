@@ -15,11 +15,6 @@ class Board {
         }
     }
 
-    private String row(int i){
-
-        return Arrays.stream(grid[i]).map(Cell::toString).collect(Collectors.joining());
-    }
-
     @Override
     public String toString() {
         return Arrays.stream(grid).map(
