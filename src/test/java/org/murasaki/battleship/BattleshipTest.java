@@ -6,9 +6,10 @@ import org.junit.jupiter.api.Test;
 class BattleshipTest {
 
     @Test
-    void testConstructor() {
-        BattleshipGame game = new BattleshipGame();
-        Approvals.verify(game);
+    void testNewGame() {
+        Board emptyBoard = new Board(5, 5);
+        Battleship battleship = new Battleship(emptyBoard, emptyBoard);
+        Approvals.verify(battleship);
     }
 
 }

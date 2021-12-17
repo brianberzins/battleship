@@ -1,6 +1,6 @@
 package org.murasaki.battleship;
 
 enum Player {
-    PLAYER_1,
-    PLAYER_2
+    player1,
+    player2
 }

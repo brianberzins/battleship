@@ -1,0 +1,13 @@
+next=player1
+player1board=
+     
+     
+     
+     
+     
+player2board=
+     
+     
+     
+     
+     
