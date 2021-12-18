@@ -1,24 +1,58 @@
 package org.murasaki.battleship;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.Collections;
 
 class Board {
-    final Cell[][] grid;
+    final Cell[] grid;
+    final int length;
+    final int height;
 
-    public Board(int length, int height) {
-        grid = new Cell[length][height];
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < height; j++) {
-                grid[i][j] = Cell.empty;
+    Board(int length, int height) {
+        this(Collections.nCopies(length * height, Cell.empty).toArray(new Cell[0]), length, height);
+    }
+
+    Board(Cell[] grid, int length, int height) {
+        this.grid = grid;
+        this.length = length;
+        this.height = height;
+    }
+
+    
+    Board addShip(Ship ship, int x, int y) {
+        Cell[] newGrid = Arrays.copyOf(grid, grid.length);
+        switch (ship.direction()) {
+            case right -> {
+                for (int s = 0; s < ship.size(); s++) {
+                    assignAsShip(newGrid, (y * length) + x + s);
+                }
+            } 
+            case down -> {
+                for (int s = 0; s < ship.size(); s++) {
+                    assignAsShip(newGrid, (y * length) + x + (s * length));
+                }
             }
         }
+        return new Board(newGrid, length, height);
+    }
+
+    private void assignAsShip(Cell[] newGrid, int i) {
+        if (newGrid[i] == Cell.ship) {
+            throw new IllegalArgumentException();
+        }
+        newGrid[i] = Cell.ship;
     }
 
     @Override
     public String toString() {
-        return Arrays.stream(grid).map(
-                r -> Arrays.stream(r).map(Cell::toString).collect(Collectors.joining())
-        ).collect(Collectors.joining("\n"));
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < grid.length; i++) {
+            if (i % length == 0 && i != 0) {
+                stringBuilder.append("\n");
+            }
+            stringBuilder.append(grid[i].toString());
+        }
+        return stringBuilder.toString();
     }
+
 }

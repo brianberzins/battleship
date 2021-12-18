@@ -1,4 +1,4 @@
 package org.murasaki.battleship;
 
-class Ship {
+record Ship(int size, Direction direction) {
 }
