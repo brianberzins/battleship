@@ -55,4 +55,17 @@ class Board {
         return stringBuilder.toString();
     }
 
+    int getIndex(int x, int y) {
+        if (x < 0 || length < x || y < 0 || height < y) {
+            throw new IndexOutOfBoundsException();
+        }
+        return (y * length) + x;
+    }
+
+    Board fireShot(int x, int y) {
+        int i = getIndex(x, y);
+        Cell[] newGrid = Arrays.copyOf(grid, grid.length);
+        newGrid[i] = grid[i] == Cell.ship ? Cell.hit : Cell.miss;
+        return new Board(newGrid, length, height);
+    }
 }

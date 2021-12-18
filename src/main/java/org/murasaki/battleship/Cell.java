@@ -3,7 +3,7 @@ package org.murasaki.battleship;
 enum Cell {
     empty(" "),
     hit("X"),
-    miss(" "),
+    miss("0"),
     ship("*"),
     ;
 
