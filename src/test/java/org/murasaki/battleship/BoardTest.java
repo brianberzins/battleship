@@ -18,7 +18,7 @@ class BoardTest {
 
     @Test
     void allShipPresent() {
-        Board board = new TestPlayer().placeShips(new Fleet());
+        Board board = new TestPlayer().placeShips(new Board(), new Fleet());
         // assert that exactly the fleet is present
         assertEquals(new Fleet(), board.fleet);
     }
