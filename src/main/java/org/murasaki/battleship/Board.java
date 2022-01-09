@@ -16,26 +16,15 @@ class Board {
 
     boolean placeShip(Ship ship, Coordinate coordinate, Orientation orientation) {
         assert fleet.add(ship);
-        switch (orientation) {
-            case HORIZONTAL -> {
-                for(int i = coordinate.x; i < coordinate.x + ship.size; i++) {
-                    // TODO: check if out of bounds
-                    // TODO: check for overlap
-                    coordinates[i][coordinate.y].ship = ship;
-                }
-            }
-            case VERTICAL -> {
-                for(int j = coordinate.y; j < coordinate.y + ship.size; j++) {
-                    // TODO: check if out of bounds
-                    // TODO: check for overlap
-                    coordinates[coordinate.x][j].ship = ship;
-                }
-            }
+        int horizontal_increment = orientation == Orientation.HORIZONTAL ? 1 : 0;
+        int vertical_increment = orientation == Orientation.VERTICAL ? 1 : 0;
+
+        for(int i = 0; i < ship.size; i++) {
+            int x = coordinate.x + (i * horizontal_increment);
+            int y = coordinate.y + (i * vertical_increment);
+            // TODO validate coordinates and check for overlaps.
+            coordinates[x][y].ship = ship;
         }
-
-
-        coordinates[coordinate.x][coordinate.y].ship = ship;
-
         return true;
     }
 
