@@ -1,6 +1,9 @@
 package org.murasaki.battleship;
 
+import java.util.Collection;
+
 class Board {
+    Fleet fleet;
     Coordinate[][] coordinates;
 
     Board() {
