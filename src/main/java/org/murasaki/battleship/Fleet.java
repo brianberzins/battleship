@@ -4,15 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 class Fleet {
-    private final Collection<Ship> ships;
+    Collection<Ship> ships;
 
     Fleet() {
         this.ships = new ArrayList<>();
-        this.ships.add(Ship.AIRCRAFT_CARRIER);
-        this.ships.add(Ship.BATTLESHIP);
-        this.ships.add(Ship.CRUISER);
-        this.ships.add(Ship.SUBMARINE);
-        this.ships.add(Ship.DESTROYER);
     }
 
     @Override
@@ -30,5 +25,9 @@ class Fleet {
 
     public boolean contains(Ship ship) {
         return ships.contains(ship);
+    }
+
+    public boolean add(Ship ship) {
+        return ships.add(ship);
     }
 }

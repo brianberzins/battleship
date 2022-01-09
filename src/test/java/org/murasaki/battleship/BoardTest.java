@@ -1,6 +1,10 @@
 package org.murasaki.battleship;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -17,11 +21,53 @@ class BoardTest {
     // each ship must be the right length, in an up/down direction only.
 
     @Test
-    void allShipPresent() {
-        Board board = new TestPlayer().placeShips(new Board(), new Fleet());
-        // assert that exactly the fleet is present
-        assertEquals(new Fleet(), board.fleet);
+    void emptyBoard() {
+        Board board = new Board();
+        Arrays.stream(board.coordinates).flatMap(Arrays::stream).forEach(Assertions::assertNotNull);
+        Arrays.stream(board.coordinates).flatMap(Arrays::stream).forEach(coordinate -> assertNull(board.getShipAt(coordinate)));
     }
+
+    @Test
+    void placeShipHorizontally() {
+        Board board = new Board();
+        assertTrue(board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(0, 0), Orientation.HORIZONTAL));
+        assertTrue(board.fleet.contains(Ship.AIRCRAFT_CARRIER));
+        Arrays.stream(board.coordinates).flatMap(Arrays::stream).forEach(coordinate -> {
+            if (0 <= coordinate.x && coordinate.x <= 4 && coordinate.y == 0) {
+                assertEquals(Ship.AIRCRAFT_CARRIER, board.getShipAt(coordinate));
+            } else {
+                assertNull(board.getShipAt(coordinate));
+            }
+        });
+    }
+
+    @Test
+    void placeShipVertically() {
+        Board board = new Board();
+        assertTrue(board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(0,0), Orientation.VERTICAL));
+        assertTrue(board.fleet.contains(Ship.AIRCRAFT_CARRIER));
+        Arrays.stream(board.coordinates).flatMap(Arrays::stream).forEach(coordinate -> {
+            if (0 <= coordinate.y && coordinate.y <= 4 && coordinate.x == 0) {
+                assertEquals(Ship.AIRCRAFT_CARRIER, board.getShipAt(coordinate));
+            } else {
+                assertNull(board.getShipAt(coordinate));
+            }
+        });
+    }
+
+
+//    @Test
+//    void allShipPresent() {
+//        Board board = new Board();
+//        board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(0, 0), Orientation.HORIZONTAL);
+//        board.placeShip(Ship.BATTLESHIP, new Coordinate(0, 0), Orientation.HORIZONTAL);
+//        board.placeShip(Ship.CRUISER, new Coordinate(0, 0), Orientation.HORIZONTAL);
+//        board.placeShip(Ship.SUBMARINE, new Coordinate(0, 0), Orientation.HORIZONTAL);
+//        board.placeShip(Ship.DESTROYER, new Coordinate(0, 0), Orientation.HORIZONTAL);
+//
+//        // assert that exactly the fleet is present
+//        assertEquals(new Fleet(), board.fleet);
+//    }
 
 
     // player return board needs to be the correct size
