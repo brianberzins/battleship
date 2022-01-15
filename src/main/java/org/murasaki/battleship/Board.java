@@ -3,7 +3,7 @@ package org.murasaki.battleship;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.murasaki.battleship.ShotResultType.MISS;
+import static org.murasaki.battleship.ShotResultType.*;
 
 class Board {
     static final int SIZE = 10;
@@ -42,6 +42,10 @@ class Board {
 
     ShotResult fireOn(Coordinate coordinate) {
         firedUponCoordinates.add(coordinate);
-        return new ShotResult(MISS, null);
+        Ship ship = coordinates[coordinate.x][coordinate.y].ship;
+        if (ship == null) {
+            return new ShotResult(MISS, null);
+        }
+        return new ShotResult(HIT, ship);
     }
 }

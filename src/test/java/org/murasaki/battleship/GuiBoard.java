@@ -30,9 +30,12 @@ class GuiBoard extends Board implements Paintable {
 
     void drawFiredUponCoordinates(Graphics graphics, java.util.List<Coordinate> coordinates) {
         graphics.setColor(Color.RED);
+        Font previousFont = graphics.getFont();
+        graphics.setFont(new Font("default", Font.BOLD, previousFont.getSize() * 2));
         for (Coordinate coordinate : coordinates) {
             SwingUtils.drawCenteredString(graphics, "X", (coordinate.x + 1) * CELL_SIZE + CELL_SIZE / 2, (coordinate.y + 1) * CELL_SIZE + CELL_SIZE / 2);
         }
+        graphics.setFont(previousFont);
     }
 
     void labelAxis(Graphics graphics) {
