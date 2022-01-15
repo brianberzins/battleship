@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.murasaki.battleship.ShotResultType.MISS;
 
 class BoardTest {
 
@@ -36,6 +37,16 @@ class BoardTest {
         AwtApprovals.verify(board);
     }
 
+    @Test
+    void fireOnShips() {
+        GuiBoard board = new GuiBoard();
+        board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(2, 3), Orientation.HORIZONTAL);
+        board.placeShip(Ship.SUBMARINE, new Coordinate(3, 5), Orientation.VERTICAL);
+        ShotResult result = board.fireOn(new Coordinate(6,7));
+        assertEquals(MISS, result.type);
+        assertNull(result.ship);
+        AwtApprovals.verify(board);
+    }
 
 //    @Test
 //    void allShipPresent() {

@@ -1,9 +1,15 @@
 package org.murasaki.battleship;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.murasaki.battleship.ShotResultType.MISS;
+
 class Board {
     static final int SIZE = 10;
     Fleet fleet;
     Coordinate[][] coordinates;
+    List<Coordinate> firedUponCoordinates;
 
     Board() {
         this.coordinates = new Coordinate[SIZE][SIZE];
@@ -13,6 +19,7 @@ class Board {
             }
         }
         this.fleet = new Fleet();
+        this.firedUponCoordinates = new ArrayList<>();
     }
 
     boolean placeShip(Ship ship, Coordinate coordinate, Orientation orientation) {
@@ -31,5 +38,10 @@ class Board {
 
     public Ship getShipAt(Coordinate coordinate) {
         return coordinates[coordinate.x][coordinate.y].ship;
+    }
+
+    ShotResult fireOn(Coordinate coordinate) {
+        firedUponCoordinates.add(coordinate);
+        return new ShotResult(MISS, null);
     }
 }

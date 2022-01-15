@@ -24,7 +24,15 @@ class GuiBoard extends Board implements Paintable {
                 paintCell(x, y, graphics);
             }
         }
+        drawFiredUponCoordinates(graphics, firedUponCoordinates);
         labelAxis(graphics);
+    }
+
+    void drawFiredUponCoordinates(Graphics graphics, java.util.List<Coordinate> coordinates) {
+        graphics.setColor(Color.RED);
+        for (Coordinate coordinate : coordinates) {
+            SwingUtils.drawCenteredString(graphics, "X", (coordinate.x + 1) * CELL_SIZE + CELL_SIZE / 2, (coordinate.y + 1) * CELL_SIZE + CELL_SIZE / 2);
+        }
     }
 
     void labelAxis(Graphics graphics) {
@@ -40,12 +48,12 @@ class GuiBoard extends Board implements Paintable {
         graphics.drawRect((x + 1) * CELL_SIZE, (y + 1) * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         Ship ship = getShipAt(new Coordinate(x, y));
         if (ship != null) {
-            drawCell(x, y, graphics, Color.GRAY, ship.name().substring(0, 1));
+            drawCell(x, y, graphics, ship.name().substring(0, 1));
         }
     }
 
-    private void drawCell(int x, int y, Graphics g, Color color, String text) {
-        g.setColor(color);
+    private void drawCell(int x, int y, Graphics g, String text) {
+        g.setColor(Color.GRAY);
         g.fillRect((x + 1) * CELL_SIZE + 1, (y + 1) * CELL_SIZE + 1, CELL_SIZE - 1, CELL_SIZE - 1);
         g.setColor(Color.BLACK);
         SwingUtils.drawCenteredString(g, text, (x + 1) * CELL_SIZE + CELL_SIZE / 2, (y + 1) * CELL_SIZE + CELL_SIZE / 2);
