@@ -1,7 +1,7 @@
 package org.murasaki.battleship;
 
 class Board {
-    static final int SIZE = 8;
+    static final int SIZE = 10;
     Fleet fleet;
     Coordinate[][] coordinates;
 

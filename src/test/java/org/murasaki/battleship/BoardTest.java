@@ -13,8 +13,8 @@ class BoardTest {
     @Test
     void boardSize() {
         Board board = new Board();
-        assertEquals(8, board.coordinates.length);
-        assertEquals(8, board.coordinates[0].length);
+        assertEquals(10, board.coordinates.length);
+        assertEquals(10, board.coordinates[0].length);
     }
 
     // all ships must be entirely on the board
