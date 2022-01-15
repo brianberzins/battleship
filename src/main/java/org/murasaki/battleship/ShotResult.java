@@ -24,4 +24,9 @@ class ShotResult {
     public int hashCode() {
         return Objects.hash(type, ship);
     }
+
+    @Override
+    public String toString() {
+        return "You " + type.name() + (type == ShotResultType.MISSED ? "" : " my " + ship.name());
+    }
 }

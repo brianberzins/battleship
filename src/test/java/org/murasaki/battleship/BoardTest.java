@@ -18,10 +18,6 @@ class BoardTest {
         assertEquals(10, board.coordinates[0].length);
     }
 
-    // all ships must be entirely on the board
-    // they cannot overlap
-    // each ship must be the right length, in an up/down direction only.
-
     @Test
     void emptyBoard() {
         Board board = new Board();
@@ -42,43 +38,17 @@ class BoardTest {
         GuiBoard board = new GuiBoard();
         board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(2, 3), Orientation.HORIZONTAL);
         board.placeShip(Ship.SUBMARINE, new Coordinate(3, 5), Orientation.VERTICAL);
-        assertEquals(new ShotResult(MISS, null), board.fireOn(new Coordinate(6,7)));
+        assertEquals(new ShotResult(MISSED, null), board.fireOn(new Coordinate(6,7)));
         assertEquals(new ShotResult(HIT, Ship.AIRCRAFT_CARRIER), board.fireOn(new Coordinate(4,3)));
         AwtApprovals.verify(board);
     }
 
-//    @Test
-//    void allShipPresent() {
-//        Board board = new Board();
-//        board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(0, 0), Orientation.HORIZONTAL);
-//        board.placeShip(Ship.BATTLESHIP, new Coordinate(0, 0), Orientation.HORIZONTAL);
-//        board.placeShip(Ship.CRUISER, new Coordinate(0, 0), Orientation.HORIZONTAL);
-//        board.placeShip(Ship.SUBMARINE, new Coordinate(0, 0), Orientation.HORIZONTAL);
-//        board.placeShip(Ship.DESTROYER, new Coordinate(0, 0), Orientation.HORIZONTAL);
-//
-//        // assert that exactly the fleet is present
-//        assertEquals(new Fleet(), board.fleet);
-//    }
-
-
-    // player return board needs to be the correct size
-
-//    }
-//
-//    @Test
-//    void shipsMissing() {
-//
-//    }
-//
-//
-//    @Test
-//    void allShipsInBounds() {
-//
-//    }
-//
-//    @Test
-//    void shipsDoNotOverlap() {
-//
-//    }
+    @Test
+    void sinkOnShips() {
+        GuiBoard board = new GuiBoard();
+        board.placeShip(Ship.DESTROYER, new Coordinate(3, 4), Orientation.HORIZONTAL);
+        assertEquals(new ShotResult(HIT, Ship.DESTROYER), board.fireOn(new Coordinate(3,4)));
+        assertEquals(new ShotResult(SANK, Ship.DESTROYER), board.fireOn(new Coordinate(4,4)));
+    }
 
 }
