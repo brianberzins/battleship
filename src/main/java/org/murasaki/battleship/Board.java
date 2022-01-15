@@ -1,13 +1,14 @@
 package org.murasaki.battleship;
 
 class Board {
+    static final int SIZE = 8;
     Fleet fleet;
     Coordinate[][] coordinates;
 
     Board() {
-        this.coordinates = new Coordinate[8][8];
-        for(int i = 0; i < coordinates.length; i++) {
-            for(int j = 0; j < coordinates[i].length; j++) {
+        this.coordinates = new Coordinate[SIZE][SIZE];
+        for(int i = 0; i < SIZE; i++) {
+            for(int j = 0; j < SIZE; j++) {
                 coordinates[i][j] = new Coordinate(i,j);
             }
         }

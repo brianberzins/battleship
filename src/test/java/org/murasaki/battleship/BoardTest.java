@@ -1,5 +1,6 @@
 package org.murasaki.battleship;
 
+import org.approvaltests.awt.AwtApprovals;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +26,13 @@ class BoardTest {
         Board board = new Board();
         Arrays.stream(board.coordinates).flatMap(Arrays::stream).forEach(Assertions::assertNotNull);
         Arrays.stream(board.coordinates).flatMap(Arrays::stream).forEach(coordinate -> assertNull(board.getShipAt(coordinate)));
+    }
+
+    @Test
+    void placeShips() {
+        GuiBoard board = new GuiBoard();
+        board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(1, 2), Orientation.HORIZONTAL);
+        AwtApprovals.verify(board);
     }
 
     @Test
