@@ -32,35 +32,8 @@ class BoardTest {
     void placeShips() {
         GuiBoard board = new GuiBoard();
         board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(1, 2), Orientation.HORIZONTAL);
+        board.placeShip(Ship.SUBMARINE, new Coordinate(7, 4), Orientation.VERTICAL);
         AwtApprovals.verify(board);
-    }
-
-    @Test
-    void placeShipHorizontally() {
-        Board board = new Board();
-        assertTrue(board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(0, 0), Orientation.HORIZONTAL));
-        assertTrue(board.fleet.contains(Ship.AIRCRAFT_CARRIER));
-        Arrays.stream(board.coordinates).flatMap(Arrays::stream).forEach(coordinate -> {
-            if (0 <= coordinate.x && coordinate.x <= 4 && coordinate.y == 0) {
-                assertEquals(Ship.AIRCRAFT_CARRIER, board.getShipAt(coordinate));
-            } else {
-                assertNull(board.getShipAt(coordinate));
-            }
-        });
-    }
-
-    @Test
-    void placeShipVertically() {
-        Board board = new Board();
-        assertTrue(board.placeShip(Ship.AIRCRAFT_CARRIER, new Coordinate(0,0), Orientation.VERTICAL));
-        assertTrue(board.fleet.contains(Ship.AIRCRAFT_CARRIER));
-        Arrays.stream(board.coordinates).flatMap(Arrays::stream).forEach(coordinate -> {
-            if (0 <= coordinate.y && coordinate.y <= 4 && coordinate.x == 0) {
-                assertEquals(Ship.AIRCRAFT_CARRIER, board.getShipAt(coordinate));
-            } else {
-                assertNull(board.getShipAt(coordinate));
-            }
-        });
     }
 
 
