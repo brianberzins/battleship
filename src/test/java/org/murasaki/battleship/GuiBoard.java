@@ -27,6 +27,8 @@ class GuiBoard extends Board implements Paintable {
     }
 
     void paintCell(int x, int y, Graphics graphics) {
+        graphics.setColor(Color.WHITE);
+        graphics.drawRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         Ship ship = getShipAt(new Coordinate(x, y));
         if (ship != null) {
             drawCell(x, y, graphics, Color.GRAY, ship.name().substring(0, 1));
